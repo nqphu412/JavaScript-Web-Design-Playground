@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors Game</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: lightgoldenrodyellow;
+      }
+      button {
+        cursor: pointer;
+      }
+      .play {
+        display: flex;
+        flex-direction: row;
+      }
+      .game {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: #ff7e70;
+        border: none;
+        box-shadow: inset 5px 5px 40px 10px lightpink;
+        border-radius: 100px;
+        margin: 20px 10px;
+        transition: opacity 0.3s, box-shadow 0.3s;
+      }
+      .game:hover {
+        opacity: 0.7;
+      }
+      .game:active{
+        opacity: 0.9;
+        background-color: #ff7d6e;
+        box-shadow: 0px 0px 5px 2px #e94f3e;
+      }
+      .reset-button {
+        padding: 5px 10px
+      }
+      .tooltip-info {
+        color: white;
+        font-size: 20px;
+        background-color: #e94f3e;
+        padding: 10px 20px;
+        border-radius: 10px;
+
+        pointer-events: none;
+        position: absolute;
+        bottom: -10px; right: -20px;
+
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .game:hover .tooltip-info {
+        opacity: 1;
+      }
+      p {
+        color: #ff7e70;    
+        font-size: 50px;    
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        margin: 0;
+      }
+      .intro {
+        margin: 20px 0px;
+      }
+      img {
+        width: 100px;
+      }
+      .currentScore {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .everyoneMoves {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="intro">
+      <p>Rock Paper Scissors</p>
+    </div>
+    <div class="play">
+      <div class="button-container">
+        <button class="game" onclick="
+          decideWin('rock');
+          updateScore();">
+          <img src="rps-img/rock-emoji.png">
+          <p class="tooltip-info">Rock</p>
+        </button>
+      </div>
+
+      <div class="button-container">
+        <button class="game" onclick="
+          decideWin('paper');
+          updateScore();">
+          <img src="rps-img/paper-emoji.png">
+          <p class="tooltip-info">Paper</p>
+        </button>
+      </div>
+
+      <div class="button-container">
+        <button class="game" onclick="
+          decideWin('scissors');
+          updateScore();">
+          <img src="rps-img/scissors-emoji.png">
+          <p class="tooltip-info">Scissors</p>
+        </button>
+      </div>
+    </div>
+
+    <div class="result">
+      <p class="status"></p>
+      <p class="everyoneMoves"></p>
+      <p class="currentScore"></p>
+    </div>
+
+    <div>
+      <button class="reset-button" onclick="resetGame();">
+        Reset Score</button>
+    </div>
+
+
+    <script>
+      let score = JSON.parse(localStorage.getItem('score')) || {
+        win: 0,
+        lose: 0,
+        tie: 0
+      };
+
+      /* Shortcut above
+      if (!score) { // !null = true
+        score = {
+          win: 0,
+          lose: 0,
+          tie: 0
+        }
+      }*/
+      console.log(score);
+
+      document.querySelector('.currentScore').innerText = `Wins: ${score.win}, Losses: ${score.lose}, Ties: ${score.tie}`;
+      function updateScore() {
+        document.querySelector('.currentScore').innerText = `Wins: ${score.win}, Losses: ${score.lose}, Ties: ${score.tie}`;
+      };
+      
+      let myChoice = '';
+
+      function randomChoice() {
+        let randomNum = 1;
+        randomNum = Math.random();
+        if (randomNum < 1 / 3) {
+          comChoice = 'rock';
+        } else if (randomNum < 2 / 3) {
+          comChoice = 'paper';
+        } else {
+          comChoice = 'scissors';
+        }
+        return comChoice;
+      }
+
+      function decideWin(myChoice) {
+        let result = '';
+
+        comChoice = randomChoice();
+        if (myChoice === comChoice) {
+          result = 'Tied';
+          score.tie++;
+        } else if ((myChoice === 'rock' && comChoice === 'paper') || 
+                  (myChoice === 'paper' && comChoice === 'scissors') || 
+                  (myChoice === 'scissors' && comChoice === 'rock')) {
+          result = 'You lose';
+          score.lose++;
+        } else { 
+          result = 'You win!'; 
+          score.win++;
+        }
+
+        document.querySelector('.status').innerHTML = result;
+        document.querySelector('.everyoneMoves').innerHTML = `You ${myChoice} - ${comChoice} Computer`;
+
+        // Save to local storage, but only support string
+        localStorage.setItem('score', JSON.stringify(score));
+
+        console.log(`Win: ${score.win}, Lose: ${score.lose}, Tie: ${score.tie}`);
+        
+        //alert(`You pick ${myChoice}. Computer picked ${comChoice}. ${result}`);
+      }
+
+      function resetGame() {
+        score.win = 0;
+        score.lose = 0;
+        score.tie = 0;
+        console.log(`Win: ${score.win}, Lose: ${score.lose}, Tie: ${score.tie}`);
+        localStorage.removeItem('score');
+        updateScore();
+        document.querySelector('.status').innerHTML = null;
+        document.querySelector('.everyoneMoves').innerHTML = null;
+      }
+    </script>
+  </body>
+</html>
