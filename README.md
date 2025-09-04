@@ -28,7 +28,7 @@ This repo is just getting started. Upcoming project will be constantly updated.
 - CSS
 - JavaScript
 
-## 👨‍💻 Author
+## Author
 
 **Quang Phu (Elio) Nguyen**  
 📧 quangphu.work412@gmail.com  
