@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors Game</title>
     <style>
       body {
@@ -72,6 +73,7 @@
       }
       .intro {
         margin: 20px 0px;
+        font-weight: 700;
       }
       img {
         width: 75px;
@@ -88,12 +90,36 @@
         margin-top: 8px;
         margin-bottom: 5px;
       }
+
+      @media (max-width: 431px) {
+      .play {
+        display: flex;
+        flex-direction: column;
+      }
+      .game {
+        transition: opacity 1s, box-shadow 1s;
+      }
+      .game:active{
+        opacity: 0.9;
+        background-color: #ff7d6e;
+        box-shadow: 0px 0px 5px 2px #e94f3e;
+      }
+      p { 
+        font-size: 33px;
+      }
+      .title {
+        margin-top: 40px;
+      }
+      .note {
+        display: none;
+      }
+      }
       
     </style>
   </head>
   <body onkeydown="pressNumber()">
     <div class="intro">
-      <p>Rock Paper Scissors</p>
+      <p class="title">Rock Paper Scissors</p>
       <p class="note">Note: Press 1 (Rock), 2 (Paper), 3 (Scissors), and 0 to reset</p>
     </div>
     <div class="play">
@@ -227,7 +253,6 @@
           updateScore();
         }
       }
-      
 
       function resetGame() {
         score.win = 0;
