@@ -10,7 +10,7 @@ A simple browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaSc
 - Click to choose your move  
 - Game logic determines the winner  
 - Score updates dynamically  
-- Styled for desktop view
+- Styled for both phone and desktop view
 
 🔗 **Live Demo**: [Play the game here](https://nqphu412.github.io/JavaScript-Web-Design-Playground/rock-paper-scissor.html)
 
