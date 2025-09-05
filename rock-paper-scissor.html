@@ -19,12 +19,12 @@
       }
       .game {
         position: relative;
-        width: 150px;
-        height: 150px;
+        width: clamp(120px, 30vw, 200px);
+        aspect-ratio: 1/1;
         background-color: #ff7e70;
         border: none;
         box-shadow: inset 5px 5px 40px 10px lightpink;
-        border-radius: 100px;
+        border-radius: 50%;
         margin: 10px 10px;
         transition: opacity 0.3s, box-shadow 0.3s;
       }
@@ -104,12 +104,13 @@
         flex-direction: column;
       }
       .game {
-        width: 130px;
-        height: 130px;
+        width: 18vh;
+        aspect-ratio: 1 / 1;
+        border-radius: 50%;
         transition: opacity 1s, box-shadow 1s;
       }
       img {
-        width: 70px;
+        width: 8vh;
       }
       .game:active{
         opacity: 0.9;
