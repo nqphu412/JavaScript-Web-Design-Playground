@@ -19,7 +19,7 @@
       }
       .game {
         position: relative;
-        width: clamp(120px, 30vw, 200px);
+        width: clamp(80px, 23vw, 140px);
         aspect-ratio: 1/1;
         background-color: #ff7e70;
         border: none;
@@ -41,7 +41,7 @@
       .reset-button {
         color: #7a1b10;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 16px;
         background-color: #ff7d6e;
         border: none;
         border-radius: 20px;
@@ -84,22 +84,27 @@
       }
       .note {
         font-size: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+        margin-top: 30px;
       }
+      .status {
+        font-size: clamp(15px, 5vw, 30px);
+      }
+      
       .title {
-        font-size: clamp(27px,7vw,100px);
+        font-size: clamp(25px,7vw,50px);
         margin: 20px 0px 0px;
         font-weight: 700;
       }
       img {
-        width: 75px;
+        width: 60px;
       }
       .text-img {
         width: 30px
       }
       .currentScore {
-        font-size: 20px;
-        margin-bottom: 20px;
+        font-size: 15px;
+        margin-bottom: 15px;
       }
       .everyoneMoves {
         font-size: 20px;
@@ -112,11 +117,15 @@
         margin: 0px;
       }
       .play {
+        width: 100%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+
+        margin-bottom: 10px;
+        margin-top: 20px;
       }
       .game {
-        width: 18vh;
+        width: 29vw;
         aspect-ratio: 1 / 1;
         border-radius: 50%;
         transition: opacity 1s, box-shadow 1s;
@@ -159,8 +168,15 @@
   <body onkeydown="pressNumber()">
     <div class="intro">
       <p class="title">Rock Paper Scissors</p>
-      <p class="note">Note: Press 1 (Rock), 2 (Paper), 3 (Scissors), and 0 to reset</p>
     </div>
+
+    <div class="result">
+      <p class="status"></p>
+      <p class="currentScore"></p>
+      <p class="everyoneMoves"></p>
+    </div>
+
+    <p class="note">Note: Press 1 (Rock), 2 (Paper), 3 (Scissors), and 0 to reset</p>
     <div class="play">
       <div class="button-container">
         <button class="game" onclick="
@@ -188,12 +204,6 @@
           <p class="tooltip-info">Scissors</p>
         </button>
       </div>
-    </div>
-
-    <div class="result">
-      <p class="status"></p>
-      <p class="everyoneMoves"></p>
-      <p class="currentScore"></p>
     </div>
 
     <div>
@@ -263,7 +273,7 @@
         }
 
         document.querySelector('.status').innerHTML = result;
-        document.querySelector('.everyoneMoves').innerHTML = `You <img class='text-img' src=${mappingImg[myChoice]}> - <img class='text-img' src=${mappingImg[comChoice]}> Computer`;
+        document.querySelector('.everyoneMoves').innerHTML = `You <img class='text-img' src=${mappingImg[myChoice]} style="width:80px"> - <img class='text-img' src=${mappingImg[comChoice]} style="width:80px"> AI`;
 
         // Save to local storage, but only support string
         localStorage.setItem('score', JSON.stringify(score));
