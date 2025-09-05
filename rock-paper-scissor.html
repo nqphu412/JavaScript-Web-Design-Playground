@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: lightgoldenrodyellow;
+        background-color: lightblue;
       }
       button {
         cursor: pointer;
@@ -21,28 +21,25 @@
         position: relative;
         width: clamp(80px, 23vw, 140px);
         aspect-ratio: 1/1;
-        background-color: #ff7e70;
+        background-color: rgb(145, 159, 250);
         border: none;
-        box-shadow: inset 5px 5px 40px 10px lightpink;
+        box-shadow: inset 5px 5px 40px 10px rgb(106, 93, 252);
         border-radius: 50%;
         margin: 10px 10px;
         transition: all 0.2s;
       }
       .game:hover {
-        opacity: 0.7;
         transform: translateY(-2px);
       }
       .game:active{
-        opacity: 0.9;
-        background-color: #ff7d6e;
-        box-shadow: 0px 0px 5px 2px #e94f3e;
+        box-shadow: 0px 0px 5px 2px rgb(166, 177, 212);
         transform: translateY(1px);
       }
       .reset-button {
-        color: #7a1b10;
+        color: rgb(106, 93, 252);
         font-weight: 700;
         font-size: 16px;
-        background-color: #ff7d6e;
+        background-color: rgb(145, 159, 250);
         border: none;
         border-radius: 20px;
         padding: 10px 20px;
@@ -61,7 +58,7 @@
       .tooltip-info {
         color: white;
         font-size: 15px;
-        background-color: #e94f3e;
+        background-color: rgb(106, 93, 252);
         padding: 10px 15px;
         border-radius: 10px;
 
@@ -76,7 +73,7 @@
         opacity: 1;
       }
       p {
-        color: #ff7e70;    
+        color: rgb(106, 93, 252);    
         font-size: 50px;    
         font-family: Arial, Helvetica, sans-serif;
         text-align: center;
@@ -131,12 +128,7 @@
         transition: opacity 1s, box-shadow 1s;
       }
       img {
-        width: 8vh;
-      }
-      .game:active{
-        opacity: 0.9;
-        background-color: #ff7d6e;
-        box-shadow: 0px 0px 5px 2px #e94f3e;
+        width: 14vw;
       }
       p { 
         font-size: 33px;
@@ -278,7 +270,7 @@
         // Save to local storage, but only support string
         localStorage.setItem('score', JSON.stringify(score));
 
-        console.log(`Win: ${score.win}, Lose: ${score.lose}, Tie: ${score.tie}`);
+        //console.log(`Win: ${score.win}, Lose: ${score.lose}, Tie: ${score.tie}`);
         
         //alert(`You pick ${myChoice}. Computer picked ${comChoice}. ${result}`);
       }
