@@ -19,6 +19,8 @@ A simple browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaSc
 ## What's Coming Next
 
 This repo is just getting started. Upcoming project will be constantly updated.
+Next project idea: Upcoming Project: Bill Splitter Web App
+- A simple tool to fairly split expenses among friends. It will handle both shared and individual items, making group payments (like dinners or outings) easier to calculate.
 
 ---
 
