@@ -1,0 +1,217 @@
+/* Animation (Not activated)
+@keyframes spin-glow {
+  0% {
+    box-shadow: inset 20px 0 30px 5px rgb(106, 93, 252),
+                    inset -20px 0 30px 5px rgb(223, 93, 252);
+    }
+  25% {
+    box-shadow: inset 0 20px 30px 5px rgb(106, 93, 252),
+                    inset 0 -20px 30px 5px rgb(223, 93, 252);
+    }
+  50% {
+    box-shadow: inset -20px 0 30px 5px rgb(106, 93, 252),
+                    inset 20px 0 30px 5px rgb(223, 93, 252);
+    }
+  75% {
+    box-shadow: inset 0 -20px 30px 5px rgb(106, 93, 252),
+                    inset 0 20px 30px 5px rgb(223, 93, 252);
+  }
+  100% {
+    box-shadow: inset 20px 0 30px 5px rgb(106, 93, 252),
+                    inset -20px 0 30px 5px rgb(223, 93, 252);
+  }
+} */
+    
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightblue;
+}
+    
+button {
+  cursor: pointer;
+}
+    
+.play {
+  display: flex;
+  flex-direction: row;
+}
+    
+.game {
+  width: clamp(80px, 23vw, 140px);
+  aspect-ratio: 1/1;
+  background-color: transparent;
+  border: none;
+  box-shadow: inset 15px 10px 30px 5px rgb(106, 93, 252),
+        inset -5px -3px 20px 2px rgb(93, 252, 212);
+  border-radius: 50%;
+  margin: 10px 10px;
+  transition: all 0.2s;
+  /* animation: spin-glow 5s linear infinite;*/
+}
+    
+.game:hover {
+  transform: translateY(-2px);
+}
+    
+.game:active {
+  transform: translateY(1px);
+}
+    
+.reset-button, .autoPlay-button, .cf-button {
+  color: rgb(106, 93, 252);
+  font-weight: 700;
+  font-size: 16px;
+  background-color: rgb(145, 159, 250);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 0px;
+  transition: all 0.1s;
+  box-shadow: 0px 10px 0px;
+  margin-right: 10px;
+}
+    
+.reset-button:hover, .autoPlay-button:hover {
+  box-shadow: 0px 12px 0px;
+  transform: translateY(-2px);
+}
+    
+.reset-button:active, .autoPlay-button:active {
+  box-shadow: 0px 8px 0px;
+  transform: translateY(2px);
+}
+    
+.tooltip-info {
+  color: white;
+  font-size: 15px;
+  background-color: rgb(106, 93, 252);
+  padding: 10px 15px;
+  border-radius: 10px;
+  pointer-events: none;
+  position: absolute;
+  bottom: -10px;
+  right: -20px;
+  opacity: 0;
+  transition: all 0.3s;
+}
+    
+.game:hover .tooltip-info {
+  opacity: 1;
+}
+    
+.is-auto {
+  color: rgb(66, 58, 155);
+}
+    
+p, div {
+  color: rgb(106, 93, 252);
+  font-size: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin: 0;
+}
+    
+.note {
+  font-size: 15px;
+  margin-bottom: 0px;
+  margin-top: 30px;
+}
+    
+.confirm-container {
+  margin-top: 20px;
+}
+    
+.confirm-container p {
+  font-size: 18px;
+}
+    
+.status {
+  font-size: clamp(15px, 5vw, 30px);
+}
+    
+.title {
+  font-size: clamp(25px, 7vw, 50px);
+  margin: 20px 0px 0px;
+  font-weight: 700;
+}
+    
+img {
+  width: 60px;
+}
+    
+.text-img {
+  width: 30px
+}
+    
+.currentScore {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+    
+.everyoneMoves {
+  font-size: 20px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+    
+@media (max-width: 431px) {
+  body {
+    margin: 0px;
+  }
+    
+  .play {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+    
+  .game {
+    width: 29vw;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    transition: opacity 1s, box-shadow 1s;
+  }
+    
+  img {
+    width: 14vw;
+  }
+    
+  p {
+    font-size: 33px;
+  }
+    
+  .title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+    
+  .note {
+    display: none;
+  }
+    
+  .tooltip-info {
+    display: none;
+  }
+    
+  .reset-button, .autoPlay-button, .cf-button {
+    box-shadow: none;
+  }
+    
+  .reset-button:hover,
+  .autoPlay-button:hover,
+  .cf-button:hover {
+    box-shadow: none;
+    transform: none;
+  }
+    
+  .reset-button:active,
+  .autoPlay-button:active,
+  .cf-button:active {
+    box-shadow: none;
+    transform: none;
+  }
+}
