@@ -17,6 +17,7 @@ A simple browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaSc
 ### Bill Splitter
  A simple and lightweight tool to fairly split expenses among friends. It supports both shared and individual items — perfect for group dinners, trips, or any shared costs.
  - Currently under development
+ - Reset selected splitting action is not included at the moment
  - Usable in its current state
  - Design improvements coming soon
 
