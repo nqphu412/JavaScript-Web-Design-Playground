@@ -4,7 +4,7 @@ This repository is where I explore and practice **JavaScript-based web design**.
 
 ---
 
-## Current Project
+## Current Projects
 ### Rock-Paper-Scissors Game
 A simple browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaScript.  
 - Click to choose your move  
@@ -14,13 +14,20 @@ A simple browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaSc
 
 🔗 **Live Demo**: [Play the game here](https://nqphu412.github.io/JavaScript-Web-Design-Playground/rock-paper-scissor/rock-paper-scissor.html)
 
+### Bill Splitter
+ A simple and lightweight tool to fairly split expenses among friends. It supports both shared and individual items — perfect for group dinners, trips, or any shared costs.
+ - Currently under development
+ - Usable in its current state
+ - Design improvements coming soon
+
+🔗 **Live Demo**: [Start splitting bills](https://nqphu412.github.io/JavaScript-Web-Design-Playground/Bill%20Splitter/index.html)
+
 ---
 
 ## What's Coming Next
 
-This repo is just getting started. Upcoming project will be constantly updated.
-Next project idea: Upcoming Project: Bill Splitter Web App
-- A simple tool to fairly split expenses among friends. It will handle both shared and individual items, making group payments (like dinners or outings) easier to calculate.
+New ideas and feedback are always welcome!
+📩 Feel free to share your thoughts via email.
 
 ---
 
