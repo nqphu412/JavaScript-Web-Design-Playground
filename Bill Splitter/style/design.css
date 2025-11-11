@@ -1,0 +1,107 @@
+.name-section, .cost-section {
+  margin-bottom: 20px;
+}
+
+.name-input, .cost-input {
+  padding: 10px 20px;
+}
+
+.remove-btn, .add-btn, .confirm-btn, 
+.next-btn, .reset-btn {
+  padding: 10px 20px;
+}
+
+.personName {
+  margin: 0px;
+}
+
+.name-shown-js { /*UL SECTION*/
+  display: none;
+}
+.name-shown {
+  display: block;
+  width: 500px;
+}
+
+.eachName {
+  /*IL SECTION*/
+  background-color: lightpink;
+  display: grid;
+  grid-template-columns: 200px 100px;
+  align-items: center;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.cost-shown-js {
+  display: none;
+}
+
+.cost-shown {
+  display: block;
+}
+
+.next-btn, .reset-btn {
+  display: none;
+  margin-bottom: 40px;
+}
+.next-shown, .reset-shown {
+  display: block
+}
+
+
+.remainder-section {
+  display: none;
+}
+
+.remainder-shown {
+  display: block;
+}
+
+.eachCost, .itemName {
+  padding: 10px;
+}
+.divide-btn {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.dividing-section {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}
+
+.peopleColumn, .moneyColumn {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  row-gap: 30px;
+}
+
+.money-btn {
+  pointer-events: none;
+  height: 40px;
+}
+
+.division-section-btn {
+  padding: 10px;
+  margin-bottom: 4px;
+}
+
+.people-button {
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  background-color: lightblue;
+  box-shadow: 0px 2px;
+  transform: translateY(-2px);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.peopleClick {
+  background-color: rgb(130, 167, 248);
+  transform: translateY(0px);
+  box-shadow: 0px 0px;
+}

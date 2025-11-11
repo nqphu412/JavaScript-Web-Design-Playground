@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bill Splitter</title>
+    <link rel="stylesheet" href="style/design.css">
+  </head>
+  <body>
+    <h1>Bill Splitter</h1>
+    
+    <div class="name-section">
+      <p>Insert everyone's name</p>
+      <input class="name-input" type="text" placeholder="Name">
+      <button class="add-btn add-btn-js">Add</button>
+      <div class="name-shown-js"></div>
+    </div>
+    <div class="cost-section">
+      <input class="cost-input" type="number" placeholder="Total Cost">
+      <button class="confirm-btn confirm-btn-js">Confirm</button>
+      <p class="cost-shown-js"></p>
+    </div>
+    
+    <button class="next-btn next-btn-js">Next</button>
+    <button class="reset-btn reset-btn-js">Reset</button>
+
+    <div class="remainder-section">
+      <h1  class="remainder-title">Current Remainder</h1>
+      <p>Insert cost of an item and choose person/people paying for it</p>
+      <input class="eachCost" type="number" placeholder="Cost of item to divide">
+      <input class="itemName" type="text" placeholder="Name of item">
+      <p class="deviation-error"></p>
+
+      <div class="dividing-section">
+        <div class="peopleColumn"></div>
+        <div class="moneyColumn"></div>
+      </div>
+      
+      <button class="divide-btn divide-btn-js">Divide</button>
+      <p class="current-division-state"></p>
+    </div>
+
+
+
+    <script src="script.js"></script>
+  </body>
+</html>
