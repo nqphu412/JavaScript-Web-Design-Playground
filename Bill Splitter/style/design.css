@@ -2,6 +2,51 @@
   margin-bottom: 20px;
 }
 
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.remainder-title {
+  justify-content: left;
+  font-size: 30px;
+}
+
+p {
+  margin-top: 0px;
+  margin-bottom: 5px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 400px 1fr 1fr;
+}
+
+.defining-zone {
+  margin-left: 20px;
+}
+
+.division-result p {
+  display: inline;
+}
+
+.division-result {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+}
+
+.splitting-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 .name-input, .cost-input {
   padding: 10px 20px;
 }
@@ -9,6 +54,10 @@
 .remove-btn, .add-btn, .confirm-btn, 
 .next-btn, .reset-btn {
   padding: 10px 20px;
+}
+
+.remove-btn {
+  width: 100px;
 }
 
 .personName {
@@ -20,14 +69,12 @@
 }
 .name-shown {
   display: block;
-  width: 500px;
 }
 
 .eachName {
   /*IL SECTION*/
-  background-color: lightpink;
   display: grid;
-  grid-template-columns: 200px 100px;
+  grid-template-columns: 150px 1fr;
   align-items: center;
   padding-left: 20px;
   margin-top: 8px;
@@ -49,8 +96,7 @@
   display: block
 }
 
-
-.remainder-section {
+.splitting-zone {
   display: none;
 }
 
