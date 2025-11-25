@@ -3,6 +3,9 @@ let totalCost = 0;
 let remainderValue = 0;
 let resetRemainder = true;
 let createTable = true;
+let itemNameList = [];
+let itemCostList = [];
+let itemPeopleList = [];
 
 const addButton = document.querySelector('.add-btn-js');
 const confirmButton = document.querySelector('.confirm-btn-js');
@@ -16,12 +19,12 @@ const showNameArea = document.querySelector('.name-shown-js');
 const costInput = document.querySelector('.cost-input');
 const showCostArea = document.querySelector('.cost-shown-js');
 
-const remainderSection = document.querySelector('.remainder-section');
+const remainderSection = document.querySelector('.splitting-zone');
 const peopleColumn = document.querySelector('.peopleColumn');
 const moneyColumn = document.querySelector('.moneyColumn');
 
 const deviationShow = document.querySelector('.deviation-error')
-const updateState = document.querySelector('.current-division-state')
+const resultTable = document.querySelector('.division-result')
 
 // NAME SECTION
 document.querySelector('.name-input').addEventListener('keydown', (e) => {
@@ -194,21 +197,24 @@ function performDivision() {
     itemCost.value <= 0 || itemName.value === '' ||
     allPeopleUsingItem.length === 0) { // Wrong format
     console.log('check');
-    itemCost.value = '';
-    itemName.value = '';
+    //itemCost.value = '';
+    //itemName.value = '';
     return;
   }
+
+  itemNameList.push(itemName.value);
+  itemCostList.push(itemCost.value);
   
   let allPeopleName = [];
   allPeopleUsingItem.forEach(personName => {
     allPeopleName.push(personName.innerHTML);
     personName.classList.remove('peopleClick');
   } );
+  itemPeopleList.push(allPeopleName);
 
   const matchingIdx = allPeopleName.map(name => nameList.indexOf(name));
   const afterDivisionCost = itemCost.value / allPeopleUsingItem.length;
 
-  console.log(matchingIdx);
   // Add to the corresponding money button
   const allMoneyButton = document.querySelectorAll('.money-btn');
   allMoneyButton.forEach((eachMoneyBtn, idx) => {
@@ -217,9 +223,6 @@ function performDivision() {
       eachMoneyBtn.innerHTML = newTotal.toFixed(2);
     }
   });
-
-  
-  console.log(itemCost.value, totalCost, remainderValue);
 
   if (remainderValue === 0) {
     if (Number(itemCost.value) > totalCost) {
@@ -239,7 +242,16 @@ function performDivision() {
     }
   }
   deviationShow.innerHTML = `Remainder stored in computer (due to JS precision error): ${remainderValue}`
-  updateState.innerHTML = `Just divided ${itemCost.value} of ${itemName.value} for ${allPeopleName.join(', ')}`
+  
+  resultTable.innerHTML = '';
+  itemCostList.forEach((cost, idx) => {
+    let currentState = document.createElement('div');
+    currentState.classList.add('splitting-row');
+    currentState.innerHTML = `
+    <p>Just divided ${cost} of ${itemNameList[idx]} for ${itemPeopleList[idx].join(', ')}</p>
+    <button>Reset splitting</button>`;
+    resultTable.appendChild(currentState);
+  });
 
   showDivisionSection();
 
