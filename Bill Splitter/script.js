@@ -31,6 +31,7 @@ function addName() {
   nameList.push(nameInput.value);
   nameInput.value = ``;
   showName();
+  resetPage();
 }
 
 function showName() {
@@ -101,6 +102,11 @@ function resetPage() {
   splittingSection.classList.remove('remainder-shown');
   peopleColumn.innerHTML = '';
   moneyColumn.innerHTML = '';
+
+  itemNameList = [];
+  itemCostList = [];
+  itemPeopleList = [];
+  resultTable.innerHTML = '';
 
   // Mark it needs to create table again
   createTable = true;
