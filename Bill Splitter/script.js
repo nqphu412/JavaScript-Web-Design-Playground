@@ -1,14 +1,10 @@
 let nameList = []; // 'Phu', 'Nhu', 'Gia', 'Diem', 'Muy'
-let totalCost = 0;
-let remainderValue = 0;
-let resetRemainder = true;
 let createTable = true;
 let itemNameList = [];
 let itemCostList = [];
 let itemPeopleList = [];
 
 const addButton = document.querySelector('.add-btn-js');
-const confirmButton = document.querySelector('.confirm-btn-js');
 const nextBtn   = document.querySelector('.next-btn-js');
 const resetBtn  = document.querySelector('.reset-btn-js');
 const divideBtn = document.querySelector('.divide-btn-js');
@@ -16,22 +12,16 @@ const divideBtn = document.querySelector('.divide-btn-js');
 const nameInput = document.querySelector('.name-input');
 const showNameArea = document.querySelector('.name-shown-js');
 
-const costInput = document.querySelector('.cost-input');
-const showCostArea = document.querySelector('.cost-shown-js');
-
-const remainderSection = document.querySelector('.splitting-zone');
+const splittingSection = document.querySelector('.splitting-zone');
+const totalShow = document.querySelector('.current-total-title');
 const peopleColumn = document.querySelector('.peopleColumn');
 const moneyColumn = document.querySelector('.moneyColumn');
 
-const deviationShow = document.querySelector('.deviation-error')
 const resultTable = document.querySelector('.division-result')
 
-// NAME SECTION
+// SECTION 1: Add everyone' name
 document.querySelector('.name-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    addName();
-  }
-});
+  if (e.key === 'Enter') {addName();}});
 addButton.addEventListener('click', addName);
 
 function addName() {
@@ -75,60 +65,23 @@ function showName() {
 function removeAName(idx) {
   nameList.splice(idx, 1);
   showName();
-  resetPage2();
+  resetPage();
 }
 
-////////////////////////////////////
-
-// COST SECTION
-confirmButton.addEventListener('click', confirmCost);
-document.querySelector('.cost-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    confirmCost();
-  }
-});
-
-function confirmCost() {
-  resetPage2();
-
-  if (costInput.value <= 0) {
-    costInput.value = '';
-    alert(`Total cost need to be positive`);
-    return;
-  }
-
-  totalCost = costInput.value;
-  costInput.value = '';
-  
-  showCost();
-  showNextBtn();
-}
-
-function showCost() {
-  if (totalCost === 0) {
-    showCostArea.classList.remove('cost-shown');
-    return;
-  }
-  showCostArea.innerHTML = 'Total cost: $' + totalCost;
-  showCostArea.classList.add('cost-shown');
-}
-
+// SECTION 2: NEXT, RESET buttons appear
 function showNextBtn() {
   resetBtn.classList.remove('reset-shown');
 
-  if (totalCost <= 0  || nameList.length === 0) {
+  if (nameList.length === 0) {
     nextBtn.classList.remove('next-shown');
     return;
   };
 
   nextBtn.classList.add('next-shown');
-
-  resetRemainder = true;
 };
 
-// NEXT BUTTON (ONLY SHOWN WHEN HAVE BOTH COST AND PEOPLE INVOLVED)
 nextBtn.addEventListener('click', () => {
-  showDivisionSection();
+  showSplittingSection();
   nextBtn.classList.remove('next-shown');
   resetBtn.classList.add('reset-shown');
 });
@@ -136,34 +89,35 @@ nextBtn.addEventListener('click', () => {
 resetBtn.addEventListener('click', () => {
   // Reset all data
   nameList = [];
-  totalCost = 0;
-  remainderValue = 0;
 
   // Reset display
   showName();
-  showCost();
-  resetPage2();
+  resetPage();
 
   resetBtn.classList.remove('reset-shown');
 })
 
-// COST ALLOCATION
-function showDivisionSection() {
-  remainderSection.classList.add('remainder-shown');
+function resetPage() {
+  splittingSection.classList.remove('remainder-shown');
+  peopleColumn.innerHTML = '';
+  moneyColumn.innerHTML = '';
 
-  // Update current remainder
-  const remainderShown = document.querySelector('.remainder-title');
-  if (remainderValue === 0 && resetRemainder === true) {
-    remainderShown.innerHTML = `Current Remainder: ${Math.round(totalCost * 100) / 100}`;
-  } else {
-    remainderShown.innerHTML = `Current Remainder: ${Math.round(remainderValue * 100) / 100}`;
-  }
+  // Mark it needs to create table again
+  createTable = true;
+}
+
+// SECTION 3: Add cost and item name and Choose people who used that item
+function showSplittingSection() {
+  splittingSection.classList.add('remainder-shown');
+
+  // Update current total
+  updateTotal();
 
   if (createTable === false) {
     return;
   }
 
-  nameList.forEach((namePerson, idx) => {
+  nameList.forEach((namePerson) => {
     // Name side
     const btn = document.createElement('button');
     btn.classList.add('division-section-btn', 'people-button');
@@ -184,26 +138,27 @@ function showDivisionSection() {
   createTable = false;
 }
 
-divideBtn.addEventListener('click', () => {performDivision();})
-document.querySelector('.eachCost').addEventListener('keydown', (e) => {if (e.key === 'Enter') {performDivision();}})
+function updateTotal() {
+  const currentTotal = itemCostList.reduce((total, num) => total + Number(num), 0);
+  totalShow.innerHTML = `Current Total: ${currentTotal}`;
+};
 
+divideBtn.addEventListener('click', () => {performDivision();})
 
 function performDivision() { 
   const itemCost = document.querySelector('.eachCost');
   const itemName = document.querySelector('.itemName');
   const allPeopleUsingItem = document.querySelectorAll('.peopleClick');
   
-  if (resetRemainder === false || 
-    itemCost.value <= 0 || itemName.value === '' ||
-    allPeopleUsingItem.length === 0) { // Wrong format
-    console.log('check');
-    //itemCost.value = '';
-    //itemName.value = '';
-    return;
-  }
+  if (itemCost.value <= 0 || 
+    itemName.value === '' ||
+    allPeopleUsingItem.length === 0) {
+    return; 
+  } // Wrong format
 
   itemNameList.push(itemName.value);
   itemCostList.push(itemCost.value);
+  updateTotal();
   
   let allPeopleName = [];
   allPeopleUsingItem.forEach(personName => {
@@ -224,46 +179,47 @@ function performDivision() {
     }
   });
 
-  if (remainderValue === 0) {
-    if (Number(itemCost.value) > totalCost) {
-      alert(`It's higher than the total current remainder 1`)
-      return;
-    } else {
-      remainderValue = totalCost - itemCost.value;
-    }
-  } else {
-    if (itemCost.value > remainderValue) {
-      alert(`It's higher than the total current remainder 2`);
-      return;
-    } else {
-      remainderValue = remainderValue - itemCost.value;
-      if (remainderValue < 0.01) { 
-        resetRemainder = false };
-    }
-  }
-  deviationShow.innerHTML = `Remainder stored in computer (due to JS precision error): ${remainderValue}`
-  
+  showCostAllocation();
+
+  showSplittingSection();
+
+  itemCost.value = '';
+  itemName.value = '';
+};
+
+function showCostAllocation() {
   resultTable.innerHTML = '';
   itemCostList.forEach((cost, idx) => {
     let currentState = document.createElement('div');
     currentState.classList.add('splitting-row');
     currentState.innerHTML = `
     <p>Just divided ${cost} of ${itemNameList[idx]} for ${itemPeopleList[idx].join(', ')}</p>
-    <button>Reset splitting</button>`;
+    <button class='undo-btn'>Undo</button>`;
     resultTable.appendChild(currentState);
   });
 
-  showDivisionSection();
-
-  itemCost.value = '';
-  itemName.value = '';
+  const allUndoBtns = document.querySelectorAll('.undo-btn');
+  allUndoBtns.forEach((btn, idx) => {
+    btn.addEventListener('click', () => undoATransaction(idx));
+  });
 }
 
-function resetPage2() {
-  remainderSection.classList.remove('remainder-shown');
-  peopleColumn.innerHTML = '';
-  moneyColumn.innerHTML = '';
+function undoATransaction(idx) {
+  const targetPeople = itemPeopleList[idx]
+  const matchingIdx = targetPeople.map(name => nameList.indexOf(name));
+  const afterDivisionCost = itemCostList[idx] / targetPeople.length;
 
-  // Mark it needs to create table again
-  createTable = true
-}
+  const allMoneyButton = document.querySelectorAll('.money-btn');
+  allMoneyButton.forEach((eachMoneyBtn, idxBtn) => {
+    if (matchingIdx.includes(idxBtn)) {
+      const newTotal = Number(eachMoneyBtn.innerHTML) - afterDivisionCost
+      eachMoneyBtn.innerHTML = newTotal.toFixed(2);
+    }
+  });
+
+  itemNameList.splice(idx, 1);
+  itemCostList.splice(idx, 1);
+  itemPeopleList.splice(idx, 1);
+  updateTotal();
+  showCostAllocation();
+};
