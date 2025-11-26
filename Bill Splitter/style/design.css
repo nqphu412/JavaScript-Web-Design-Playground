@@ -1,4 +1,4 @@
-.name-section, .cost-section {
+.name-section {
   margin-bottom: 20px;
 }
 
@@ -11,7 +11,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-.remainder-title {
+.current-total-title {
   justify-content: left;
   font-size: 30px;
 }
@@ -47,11 +47,11 @@ p {
   margin-bottom: 10px;
 }
 
-.name-input, .cost-input {
+.name-input {
   padding: 10px 20px;
 }
 
-.remove-btn, .add-btn, .confirm-btn, 
+.remove-btn, .add-btn, 
 .next-btn, .reset-btn {
   padding: 10px 20px;
 }
@@ -78,14 +78,6 @@ p {
   align-items: center;
   padding-left: 20px;
   margin-top: 8px;
-}
-
-.cost-shown-js {
-  display: none;
-}
-
-.cost-shown {
-  display: block;
 }
 
 .next-btn, .reset-btn {
