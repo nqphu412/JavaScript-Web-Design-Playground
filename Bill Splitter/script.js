@@ -4,6 +4,9 @@ let itemNameList = [];
 let itemCostList = [];
 let itemPeopleList = [];
 
+const page1Layout = document.querySelector('.defining-zone');
+const page2Layout = document.querySelector('.splittingPage');
+
 const addButton = document.querySelector('.add-btn-js');
 const nextBtn   = document.querySelector('.next-btn-js');
 const resetBtn  = document.querySelector('.reset-btn-js');
@@ -51,7 +54,9 @@ function showName() {
 
     onePerson.innerHTML = `
       <p class='personName'>${name}</p>
-      <button class="remove-btn remove-btn-js">Remove</button>`;
+      <button class="remove-btn remove-btn-js">
+        <img class="remove-img" src="style/minus-927.png">
+      </button>`;
     showNameArea.appendChild(onePerson);
   });
 
@@ -84,22 +89,23 @@ function showNextBtn() {
 nextBtn.addEventListener('click', () => {
   showSplittingSection();
   nextBtn.classList.remove('next-shown');
+  page1Layout.classList.add('hiddenPage');
+
   resetBtn.classList.add('reset-shown');
+  page2Layout.classList.remove('hiddenPage');
 });
 
 resetBtn.addEventListener('click', () => {
-  // Reset all data
-  nameList = [];
-
+  page1Layout.classList.remove('hiddenPage');
+  page2Layout.classList.add('hiddenPage');
+  resetBtn.classList.remove('reset-shown');
+  
   // Reset display
   showName();
   resetPage();
-
-  resetBtn.classList.remove('reset-shown');
-})
+});
 
 function resetPage() {
-  splittingSection.classList.remove('remainder-shown');
   peopleColumn.innerHTML = '';
   moneyColumn.innerHTML = '';
 
