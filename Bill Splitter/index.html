@@ -2,31 +2,38 @@
 <html>
   <head>
     <title>Bill Splitter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/design.css">
   </head>
   <body>
-    <h1>Bill Splitter</h1>
-    
-    <div class="content">
-      <div class="defining-zone">
-        <div class="name-section">
-          <p>Insert everyone's name</p>
-          <input class="name-input" type="text" placeholder="Name">
-          <button class="add-btn add-btn-js">Add</button>
-          <div class="name-shown-js"></div>
-        </div>
-        
-        <button class="next-btn next-btn-js">Next</button>
-        <button class="reset-btn reset-btn-js">Reset</button>
+    <h1>BILL SPLITTER</h1>
+  
+    <div class="defining-zone">
+      <p class="intro-line">Insert everyone's name</p>
+      
+      <div class="add-name-line">
+        <input class="name-input" type="text" placeholder="Name">
+        <button class="add-btn add-btn-js">
+          <img class="add-img" src="style/Plus-PNG-Image.png">
+        </button>
       </div>
       
+      
+      <div class="name-shown-js"></div>  
+      <button class="next-btn next-btn-js">Next</button>
+    </div>
+      
+    <button class="reset-btn reset-btn-js">Reset</button>
+    <div class="splittingPage hiddenPage">
       <div class="splitting-zone">
         <h1 class="current-total-title">Current Remainder</h1>
         <p>Insert cost of an item and choose person/people paying for it</p>
         <input class="eachCost" type="number" placeholder="Cost of item to divide">
         <input class="itemName" type="text" placeholder="Name of item">
 
-        <div class="dividing-section">
+        <div class="allocation-section">
           <div class="peopleColumn"></div>
           <div class="moneyColumn"></div>
         </div>
