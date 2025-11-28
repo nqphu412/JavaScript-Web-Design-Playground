@@ -9,10 +9,12 @@ const page2Layout = document.querySelector('.splittingPage');
 
 const addButton = document.querySelector('.add-btn-js');
 const nextBtn   = document.querySelector('.next-btn-js');
-const resetBtn  = document.querySelector('.reset-btn-js');
+const backBtn  = document.querySelector('.back-btn-js');
 const divideBtn = document.querySelector('.divide-btn-js');
 
 const nameInput = document.querySelector('.name-input');
+const itemCost = document.querySelector('.eachCost');
+const itemName = document.querySelector('.itemName');
 const showNameArea = document.querySelector('.name-shown-js');
 
 const splittingSection = document.querySelector('.splitting-zone');
@@ -22,10 +24,58 @@ const moneyColumn = document.querySelector('.moneyColumn');
 
 const resultTable = document.querySelector('.division-result')
 
+// SECTION 0: Quick navigation when typing
+itemCost.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    backBtn.focus();
+  }
+  if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    itemName.focus();
+  }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    divideBtn.focus();
+  }
+})
+
+itemName.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    backBtn.focus();
+  } 
+  if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    itemCost.focus();
+  }
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    divideBtn.focus();
+  }
+})
+
+divideBtn.addEventListener('keydown', (e) => {
+  if(e.key === 'ArrowUp') {itemCost.focus();}
+})
+
+backBtn.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown') { itemCost.focus(); }
+})
+
 // SECTION 1: Add everyone' name
-document.querySelector('.name-input').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {addName();}});
+nameInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {addName();}
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    nextBtn.focus();
+  }
+});
 addButton.addEventListener('click', addName);
+
+nextBtn.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') { nameInput.focus(); }
+})
 
 function addName() {
   if (nameInput.value === '') {
@@ -36,6 +86,7 @@ function addName() {
   showName();
   resetPage();
 }
+
 
 function showName() {
   showNameArea.innerHTML = ''; // Reset display
@@ -76,7 +127,7 @@ function removeAName(idx) {
 
 // SECTION 2: NEXT, RESET buttons appear
 function showNextBtn() {
-  resetBtn.classList.remove('reset-shown');
+  backBtn.classList.remove('reset-shown');
 
   if (nameList.length === 0) {
     nextBtn.classList.remove('next-shown');
@@ -89,16 +140,18 @@ function showNextBtn() {
 nextBtn.addEventListener('click', () => {
   showSplittingSection();
   nextBtn.classList.remove('next-shown');
-  page1Layout.classList.add('hiddenPage');
+  page1Layout.classList.add('hidden');
 
-  resetBtn.classList.add('reset-shown');
-  page2Layout.classList.remove('hiddenPage');
+  backBtn.classList.add('reset-shown');
+  document.querySelector('.current-total-title').classList.remove('hidden');
+  page2Layout.classList.remove('hidden');
 });
 
-resetBtn.addEventListener('click', () => {
-  page1Layout.classList.remove('hiddenPage');
-  page2Layout.classList.add('hiddenPage');
-  resetBtn.classList.remove('reset-shown');
+backBtn.addEventListener('click', () => {
+  page1Layout.classList.remove('hidden');
+  document.querySelector('.current-total-title').classList.add('hidden');
+  page2Layout.classList.add('hidden');
+  backBtn.classList.remove('reset-shown');
   
   // Reset display
   showName();
@@ -142,7 +195,8 @@ function showSplittingSection() {
     // Money side
     const moneyBtn = document.createElement('button');
     moneyBtn.classList.add('division-section-btn', 'money-btn');
-    moneyBtn.innerHTML = 0;
+    moneyBtn.innerHTML = 0.00;
+    moneyBtn.disabled = true;
     moneyColumn.appendChild(moneyBtn);
   })
 
@@ -158,8 +212,6 @@ function updateTotal() {
 divideBtn.addEventListener('click', () => {performDivision();})
 
 function performDivision() { 
-  const itemCost = document.querySelector('.eachCost');
-  const itemName = document.querySelector('.itemName');
   const allPeopleUsingItem = document.querySelectorAll('.peopleClick');
   
   if (itemCost.value <= 0 || 
