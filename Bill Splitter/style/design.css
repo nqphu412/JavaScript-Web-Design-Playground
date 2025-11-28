@@ -1,5 +1,11 @@
-h1 {
+body {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+h1, h2 {
   font-family: "Lexend Peta", sans-serif;
+  color: #2E8B57;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,12 +26,15 @@ button {
   cursor: pointer;
 }
 
-/*PAGE 1 SECTION: Inserting name*/
-.current-total-title {
-  justify-content: left;
-  font-size: 30px;
+input {
+  font-size: 16px;
+  font-family: "Lexend Peta", sans-serif;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
+/*PAGE 1 SECTION: Inserting name*/
 .add-name-line {
   display: flex;
   margin-top: 10px;
@@ -33,21 +42,25 @@ button {
 }
 
 .name-input {
-  font-size: 16px;
-  font-family: "Lexend Peta", sans-serif;
   width: 150px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 1px solid black;
 }
 
 .add-btn {
+  background-color: rgb(240, 240, 240);
   width: 50px;
   height: 50px;
   margin-left: 10px;
   border-radius: 10px;
   border: 1px solid black;
+  transition: all 0.2s ease;
 }
+.add-btn:hover {
+  background-color: rgb(203, 195, 195);
+}
+.add-btn:active {
+  background-color: rgb(186, 181, 181);
+}
+
 
 .remove-btn {
   width: 50px;
@@ -71,7 +84,6 @@ button {
 }
 
 .name-shown-js {
-  /*UL SECTION*/
   display: none;
 }
 
@@ -80,7 +92,6 @@ button {
 }
 
 .eachName {
-  /*IL SECTION*/
   display: grid;
   width: 251px;
   grid-template-columns:1fr 50px;
@@ -98,16 +109,36 @@ button {
 }
 
 .next-btn{
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0px 5px black;
   margin-top: 20px;
   padding: 10px 20px;
+  transition: all 0.2s ease;
+}
+.next-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px black;
+}
+.next-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0px 0px black;
 }
 
 
 
 
+
+.current-total-title {
+  color: #2E8B57;
+  justify-content: center;
+  font-size: 30px;
+}
+
 .splittingPage {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 5fr 3fr;
+  column-gap: 20px;
 }
 
 .defining-zone {
@@ -116,32 +147,53 @@ button {
   align-items: center;
 }
 
-.division-result p {
+.history-result p {
   display: inline;
+  font-size: 16px;
 }
 
-.division-result {
+.history-result {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
 }
 
-.hiddenPage {
+.history-title {
+  font-family: "Lexend Peta", sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.division-result {
+  margin-left: 10px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.hidden {
   display: none;
 }
 
 .splitting-row {
+  color: rgb(35, 34, 34);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 6px;
 }
 
-.reset-btn {
+.undo-btn {
+  margin-left: 10px;
+  align-self: stretch;
+}
+
+.back-btn {
+  position:absolute;
   padding: 10px 20px;
 }
 
-.next-btn, .reset-btn {
+.next-btn, .back-btn {
   display: none;
   margin-bottom: 40px;
 }
@@ -165,6 +217,7 @@ button {
   padding: 10px;
 }
 
+
 .allocation-section {
   display: flex;
   column-gap: 20px;
@@ -181,6 +234,7 @@ button {
 .money-btn {
   pointer-events: none;
   height: 40px;
+  color: black;
 }
 
 .division-section-btn {
