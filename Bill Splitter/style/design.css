@@ -1,5 +1,5 @@
 body {
-  max-width: 80%;
+  width: clamp(700px, 80vw, 1200px);
   margin: 0 auto;
 }
 
@@ -22,8 +22,10 @@ p {
 }
 
 button {
+  font-size: 16px;
   font-family: "Lexend Peta", sans-serif;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 input {
@@ -136,9 +138,10 @@ input {
 }
 
 .splittingPage {
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 5fr 3fr;
-  column-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
 }
 
 .defining-zone {
@@ -155,7 +158,6 @@ input {
 .history-result {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
 }
 
 .history-title {
@@ -166,7 +168,10 @@ input {
 
 .division-result {
   margin-left: 10px;
-  max-height: 600px;
+}
+
+.scroll-activate {
+  max-height: 400px;
   overflow-y: auto;
 }
 
@@ -191,6 +196,7 @@ input {
 .back-btn {
   position:absolute;
   padding: 10px 20px;
+  border: 1px solid black;
 }
 
 .next-btn, .back-btn {
@@ -210,21 +216,31 @@ input {
 }
 
 .eachCost, .itemName {
+  box-sizing: border-box;
+  width: 30%;
   padding: 10px;
 }
+.itemName {
+  margin-right: 40px;
+}
+
 .divide-btn {
+  width: 70%;
   margin-top: 20px;
   padding: 10px;
+  height: 50px;
+  border: 1px solid black;
 }
 
 
 .allocation-section {
   display: flex;
-  column-gap: 20px;
+  column-gap: 40px;
 }
 
 .peopleColumn, .moneyColumn {
-  width: 100px;
+  box-sizing: border-box;
+  width: 30%;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
@@ -232,9 +248,12 @@ input {
 }
 
 .money-btn {
+  white-space: nowrap;
   pointer-events: none;
-  height: 40px;
+  height: 50px;
   color: black;
+  box-shadow: 0px 5px #052714;
+  transform: translateY(-5px);
 }
 
 .division-section-btn {
@@ -243,17 +262,24 @@ input {
 }
 
 .people-button {
-  height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px;
   border: none;
-  border-radius: 3px;
-  background-color: lightblue;
-  box-shadow: 0px 2px;
-  transform: translateY(-2px);
+  background-color: #4bbf7d;
+  color: white;
+  box-shadow: 0px 5px #052714;
+  transform: translateY(-5px);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .peopleClick {
-  background-color: rgb(130, 167, 248);
+  background-color: #2b8451  ;
   transform: translateY(0px);
   box-shadow: 0px 0px;
+}
+
+.show-hide-btn {
+  margin-top: 20px;
 }
