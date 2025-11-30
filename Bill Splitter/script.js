@@ -31,7 +31,7 @@ itemCost.addEventListener('keydown', (e) => {
     e.preventDefault();
     backBtn.focus();
   }
-  if (e.key === 'ArrowRight') {
+  if (e.key === 'ArrowLeft') {
     e.preventDefault();
     itemName.focus();
   }
@@ -46,7 +46,7 @@ itemName.addEventListener('keydown', (e) => {
     e.preventDefault();
     backBtn.focus();
   } 
-  if (e.key === 'ArrowLeft') {
+  if (e.key === 'ArrowRight') {
     e.preventDefault();
     itemCost.focus();
   }
@@ -57,11 +57,11 @@ itemName.addEventListener('keydown', (e) => {
 })
 
 divideBtn.addEventListener('keydown', (e) => {
-  if(e.key === 'ArrowUp') {itemCost.focus();}
+  if (e.key === 'ArrowUp') { itemName.focus();}
 })
 
 backBtn.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowDown') { itemCost.focus(); }
+  if (e.key === 'ArrowDown') { itemName.focus(); }
 })
 
 // SECTION 1: Add everyone' name
@@ -305,4 +305,5 @@ showHideBtn.addEventListener('click', () => {
     resultTable.classList.remove('scroll-activate');
   }
 })
+
 
