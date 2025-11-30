@@ -11,6 +11,7 @@ const addButton = document.querySelector('.add-btn-js');
 const nextBtn   = document.querySelector('.next-btn-js');
 const backBtn  = document.querySelector('.back-btn-js');
 const divideBtn = document.querySelector('.divide-btn-js');
+const showHideBtn = document.querySelector('.show-hide-btn-js');
 
 const nameInput = document.querySelector('.name-input');
 const itemCost = document.querySelector('.eachCost');
@@ -266,6 +267,13 @@ function showCostAllocation() {
   allUndoBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => undoATransaction(idx));
   });
+
+  if (itemNameList.length > 4) {
+    showHideBtn.classList.remove('hidden');
+  } else {
+    showHideBtn.innerHTML = 'Show less'; 
+    showHideBtn.classList.add('hidden'); 
+  }
 }
 
 function undoATransaction(idx) {
@@ -287,3 +295,13 @@ function undoATransaction(idx) {
   updateTotal();
   showCostAllocation();
 };
+
+showHideBtn.addEventListener('click', () => {
+  if (showHideBtn.innerHTML === 'Show less') {
+    showHideBtn.innerHTML = 'Full';
+    resultTable.classList.add('scroll-activate');
+  } else { 
+    showHideBtn.innerHTML = 'Show less'; 
+    resultTable.classList.remove('scroll-activate');
+  }
+})
