@@ -207,7 +207,7 @@ function showSplittingSection() {
 
 function updateTotal() {
   const currentTotal = itemCostList.reduce((total, num) => total + Number(num), 0);
-  totalShow.innerHTML = `Current Total: ${currentTotal}`;
+  totalShow.innerHTML = `Current Total: ${Number(currentTotal).toFixed(2)}`;
 };
 
 divideBtn.addEventListener('click', () => {performDivision();})
@@ -258,7 +258,7 @@ function showCostAllocation() {
     let currentState = document.createElement('div');
     currentState.classList.add('splitting-row');
     currentState.innerHTML = `
-    <p>Just divided ${cost} of ${itemNameList[idx]} for ${itemPeopleList[idx].join(', ')}</p>
+    <p>${cost} of ${itemNameList[idx]} spent by ${itemPeopleList[idx].join(', ')}</p>
     <button class='undo-btn'>Undo</button>`;
     resultTable.appendChild(currentState);
   });
@@ -305,3 +305,4 @@ showHideBtn.addEventListener('click', () => {
     resultTable.classList.remove('scroll-activate');
   }
 })
+
