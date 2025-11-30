@@ -1,4 +1,4 @@
-let nameList = []; // 'Phu', 'Nhu', 'Gia', 'Diem', 'Muy'
+let nameList = [];
 let createTable = true;
 let itemNameList = [];
 let itemCostList = [];
@@ -124,13 +124,14 @@ function removeAName(idx) {
   nameList.splice(idx, 1);
   showName();
   resetPage();
+  showNextBtn();
 }
 
 // SECTION 2: NEXT, RESET buttons appear
 function showNextBtn() {
   backBtn.classList.remove('reset-shown');
 
-  if (nameList.length === 0) {
+  if (nameList.length < 2) {
     nextBtn.classList.remove('next-shown');
     return;
   };
@@ -305,5 +306,6 @@ showHideBtn.addEventListener('click', () => {
     resultTable.classList.remove('scroll-activate');
   }
 })
+
 
 
