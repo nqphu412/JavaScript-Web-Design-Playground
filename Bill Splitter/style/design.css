@@ -1,17 +1,22 @@
 body {
   width: clamp(700px, 80vw, 1200px);
   margin: 0 auto;
+  padding-bottom: 50px;
 }
 
 h1, h2 {
   font-family: "Lexend Peta", sans-serif;
-  color: #2E8B57;
+  color: #4A6644;
   display: flex;
   align-items: center;
   justify-content: center;
 
   font-size: 48px;
   margin-bottom: 10px;
+}
+
+.intro-line {
+  color: #c66f80;
 }
 
 p {
@@ -44,35 +49,53 @@ input {
 }
 
 .name-input {
+  color: #4a6644;
+  border-color: #d7dab3;
   width: 150px;
+}
+.name-input::placeholder {
+  color: #ece3d2;
+}
+.name-input:focus {
+  border: 1px solid #4a6644;
+  outline: none;
 }
 
 .add-btn {
-  background-color: rgb(240, 240, 240);
+  color: #9faa74;
+  font-weight: 400;
+  font-size: 24px;
+  background-color: transparent;
   width: 50px;
   height: 50px;
   margin-left: 10px;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid #d7dab3;
   transition: all 0.2s ease;
+  padding-bottom: 7px;
 }
 .add-btn:hover {
-  background-color: rgb(203, 195, 195);
+  background-color: #d7dab3;
 }
 .add-btn:active {
-  background-color: rgb(186, 181, 181);
+  color: #4a6644;
+  background-color: #9faa74;
+  border: 1px solid #9faa74;
 }
 
 
 .remove-btn {
+  padding-bottom: 8px;
+  font-size: 30px;
+  color: #9faa74;
   width: 50px;
   height: 50px;
   border: none;
-  background-color: white;
+  background-color: transparent;
   transition: all 0.2s ease;
 }
 .remove-btn:hover {
-  background-color: rgba(248, 236, 105, 0.9);
+  background-color: #d7dab3;
 }
 
 .add-img {
@@ -98,10 +121,13 @@ input {
   width: 251px;
   grid-template-columns:1fr 50px;
   align-items: center;
-  border-bottom: 1px solid black;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-bottom: 0.5px solid #4a6644;
 }
 
 .personName {
+  color: #9faa74;
   margin-left: 15px;
   font-size: 15px;
   width: 150px;
@@ -111,20 +137,27 @@ input {
 }
 
 .next-btn{
-  border: 1px solid black;
+  color: #4a6644;
+  background-color: transparent;
+  border: 1px solid #9faa74;
   border-radius: 10px;
-  box-shadow: 0px 5px black;
+  box-shadow: 0px 5px #9faa74;
   margin-top: 20px;
   padding: 10px 20px;
   transition: all 0.2s ease;
 }
 .next-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0px 8px black;
+  color: #c66f80;
+  border: 1px solid #c66f80;
+  box-shadow: 0px 8px #c66f80;
 }
 .next-btn:active {
+  background-color: #4A6644;
+  color: white;
+  border-color: white;
   transform: translateY(3px);
-  box-shadow: 0px 0px black;
+  box-shadow: 0px 0px #4A6644;
 }
 
 
