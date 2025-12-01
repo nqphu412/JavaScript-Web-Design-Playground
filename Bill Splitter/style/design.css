@@ -160,10 +160,10 @@ input {
   flex-direction: column;
 }
 
-.history-title {
+.history-title, .splitting-instruction {
   font-family: "Lexend Peta", sans-serif;
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .division-result {
@@ -238,27 +238,30 @@ input {
   column-gap: 40px;
 }
 
-.peopleColumn, .moneyColumn {
+.peopleColumn, .moneyColumn, .pop-upColumn {
   box-sizing: border-box;
-  width: 30%;
   display: flex;
   flex-direction: column;
   margin-top: 20px;
   row-gap: 30px;
 }
 
-.money-btn {
-  white-space: nowrap;
-  pointer-events: none;
-  height: 50px;
-  color: black;
-  box-shadow: 0px 5px #052714;
-  transform: translateY(-5px);
+.peopleColumn, .moneyColumn {
+  width: 30%;
 }
 
 .division-section-btn {
   padding: 10px;
   margin-bottom: 4px;
+}
+
+.money-btn {
+  white-space: nowrap;
+  pointer-events: none;
+  height: 50px;
+  color: #4bbf7d;
+  box-shadow: 0px 5px #052714;
+  transform: translateY(-5px);
 }
 
 .people-button {
@@ -272,6 +275,17 @@ input {
   box-shadow: 0px 5px #052714;
   transform: translateY(-5px);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.popup-btn {
+  white-space: nowrap;
+  pointer-events: none;
+  height: 50px;
+  max-height: auto;
+  border: none;
+  background-color: transparent;
+  transform: translateY(-5px) translateX(-40px);
+  color: #bdc4c0;
 }
 
 .peopleClick {
