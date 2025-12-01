@@ -1,4 +1,4 @@
-let nameList = [];
+let nameList = []; // 'Phu', 'Nhu', 'Gia', 'Diem', 'Muy'
 let createTable = true;
 let itemNameList = [];
 let itemCostList = [];
@@ -22,6 +22,7 @@ const splittingSection = document.querySelector('.splitting-zone');
 const totalShow = document.querySelector('.current-total-title');
 const peopleColumn = document.querySelector('.peopleColumn');
 const moneyColumn = document.querySelector('.moneyColumn');
+const popUpColumn = document.querySelector('.pop-upColumn');
 
 const resultTable = document.querySelector('.division-result')
 
@@ -163,6 +164,7 @@ backBtn.addEventListener('click', () => {
 function resetPage() {
   peopleColumn.innerHTML = '';
   moneyColumn.innerHTML = '';
+  popUpColumn.innerHTML = '';
 
   itemNameList = [];
   itemCostList = [];
@@ -200,6 +202,12 @@ function showSplittingSection() {
     moneyBtn.innerHTML = 0.00;
     moneyBtn.disabled = true;
     moneyColumn.appendChild(moneyBtn);
+
+    // Pop-up side
+    const popUpBtn = document.createElement('button');
+    popUpBtn.classList.add('division-section-btn', 'popup-btn', 'hidden');
+    popUpBtn.disabled = true;
+    popUpColumn.appendChild(popUpBtn);
   })
 
   // Mark the table is already created.
@@ -245,8 +253,22 @@ function performDivision() {
     }
   });
 
-  showCostAllocation();
+  const allPopUpButton = document.querySelectorAll('.popup-btn');
+  allPopUpButton.forEach((eachPupUpBtn, idx) => {
+    eachPupUpBtn.classList.remove('hidden');
+    if (matchingIdx.includes(idx)) {
+      eachPupUpBtn.innerHTML = `+${afterDivisionCost.toFixed(2) }`;
+    } else {
+      eachPupUpBtn.innerHTML = ` `;
+    }
 
+    setTimeout(() => {
+      eachPupUpBtn.classList.add('hidden');
+      eachPupUpBtn.innerHTML = ``;
+    }, 1000)
+  });
+
+  showCostAllocation();
   showSplittingSection();
 
   itemCost.value = '';
@@ -306,6 +328,3 @@ showHideBtn.addEventListener('click', () => {
     resultTable.classList.remove('scroll-activate');
   }
 })
-
-
-
