@@ -108,7 +108,7 @@ function showName() {
     onePerson.innerHTML = `
       <p class='personName'>${name}</p>
       <button class="remove-btn remove-btn-js">
-        <img class="remove-img" src="style/minus-927.png">
+        -
       </button>`;
     showNameArea.appendChild(onePerson);
   });
