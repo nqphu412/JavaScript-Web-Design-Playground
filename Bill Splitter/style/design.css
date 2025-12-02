@@ -215,7 +215,7 @@ input:focus {
 .history-title, .splitting-instruction {
   color: #f4c7d0;
   font-family: "Lexend Peta", sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
@@ -395,3 +395,4 @@ input:focus {
     display: none;
   }
 }
+
