@@ -349,6 +349,7 @@ input:focus {
 }
 
 .money-btn {
+  background-color: transparent;
   color: #4a6644;
   border: 1px solid #4a6644;
   pointer-events: none;
@@ -395,4 +396,5 @@ input:focus {
     display: none;
   }
 }
+
 
