@@ -1,4 +1,4 @@
-let nameList = []; // 'Phu', 'Nhu', 'Gia', 'Diem', 'Muy'
+let nameList = [];
 let createTable = true;
 let itemNameList = [];
 let itemCostList = [];
@@ -9,7 +9,8 @@ const page2Layout = document.querySelector('.splittingPage');
 
 const addButton = document.querySelector('.add-btn-js');
 const nextBtn   = document.querySelector('.next-btn-js');
-const backBtn  = document.querySelector('.back-btn-js');
+const backBtnPC  = document.querySelector('.back-btn-js');
+const backBtnPhone = document.querySelector('.back-btn-phone-js');
 const divideBtn = document.querySelector('.divide-btn-js');
 const showHideBtn = document.querySelector('.show-hide-btn-js');
 
@@ -30,7 +31,8 @@ const resultTable = document.querySelector('.division-result')
 itemCost.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
     e.preventDefault();
-    backBtn.focus();
+    backBtnPC.focus();
+    backBtnPhone.focus();
   }
   if (e.key === 'ArrowLeft') {
     e.preventDefault();
@@ -45,7 +47,8 @@ itemCost.addEventListener('keydown', (e) => {
 itemName.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') {
     e.preventDefault();
-    backBtn.focus();
+    backBtnPC.focus();
+    backBtnPhone.focus();
   } 
   if (e.key === 'ArrowRight') {
     e.preventDefault();
@@ -61,9 +64,12 @@ divideBtn.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowUp') { itemName.focus();}
 })
 
-backBtn.addEventListener('keydown', (e) => {
+backBtnPC.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown') { itemName.focus(); }
-})
+});
+backBtnPhone.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown') { itemName.focus(); }
+});
 
 // SECTION 1: Add everyone' name
 nameInput.addEventListener('keydown', (e) => {
@@ -83,7 +89,7 @@ function addName() {
   if (nameInput.value === '') {
     return;
   }
-  nameList.push(nameInput.value);
+  nameList.splice(0,0,nameInput.value);
   nameInput.value = ``;
   showName();
   resetPage();
@@ -130,7 +136,8 @@ function removeAName(idx) {
 
 // SECTION 2: NEXT, RESET buttons appear
 function showNextBtn() {
-  backBtn.classList.remove('reset-shown');
+  backBtnPC.classList.remove('reset-shown');
+  backBtnPhone.classList.remove('reset-shown');
 
   if (nameList.length < 2) {
     nextBtn.classList.remove('next-shown');
@@ -145,17 +152,28 @@ nextBtn.addEventListener('click', () => {
   nextBtn.classList.remove('next-shown');
   page1Layout.classList.add('hidden');
 
-  backBtn.classList.add('reset-shown');
+  backBtnPC.classList.add('reset-shown');
+  backBtnPhone.classList.add('reset-shown');
   document.querySelector('.current-total-title').classList.remove('hidden');
   page2Layout.classList.remove('hidden');
 });
 
-backBtn.addEventListener('click', () => {
+backBtnPC.addEventListener('click', () => {
   page1Layout.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.add('hidden');
   page2Layout.classList.add('hidden');
-  backBtn.classList.remove('reset-shown');
+  backBtnPC.classList.remove('reset-shown');
   
+  // Reset display
+  showName();
+  resetPage();
+});
+backBtnPhone.addEventListener('click', () => {
+  page1Layout.classList.remove('hidden');
+  document.querySelector('.current-total-title').classList.add('hidden');
+  page2Layout.classList.add('hidden');
+  backBtnPhone.classList.remove('reset-shown');
+
   // Reset display
   showName();
   resetPage();
@@ -199,7 +217,7 @@ function showSplittingSection() {
     // Money side
     const moneyBtn = document.createElement('button');
     moneyBtn.classList.add('division-section-btn', 'money-btn');
-    moneyBtn.innerHTML = 0.00;
+    moneyBtn.innerHTML = '0.00';
     moneyBtn.disabled = true;
     moneyColumn.appendChild(moneyBtn);
 
@@ -230,16 +248,16 @@ function performDivision() {
     return; 
   } // Wrong format
 
-  itemNameList.push(itemName.value);
-  itemCostList.push(itemCost.value);
+  itemNameList.splice(0,0,itemName.value);
+  itemCostList.splice(0,0,itemCost.value);
   updateTotal();
   
   let allPeopleName = [];
   allPeopleUsingItem.forEach(personName => {
-    allPeopleName.push(personName.innerHTML);
+    allPeopleName.splice(0,0,personName.innerHTML);
     personName.classList.remove('peopleClick');
   } );
-  itemPeopleList.push(allPeopleName);
+  itemPeopleList.splice(0,0,allPeopleName);
 
   const matchingIdx = allPeopleName.map(name => nameList.indexOf(name));
   const afterDivisionCost = itemCost.value / allPeopleUsingItem.length;
@@ -281,7 +299,7 @@ function showCostAllocation() {
     let currentState = document.createElement('div');
     currentState.classList.add('splitting-row');
     currentState.innerHTML = `
-    <p>${cost} of ${itemNameList[idx]} spent by ${itemPeopleList[idx].join(', ')}</p>
+    <p class='detail-devision'>${cost} of ${itemNameList[idx]} spent by ${itemPeopleList[idx].join(', ')}</p>
     <button class='undo-btn'>Undo</button>`;
     resultTable.appendChild(currentState);
   });
@@ -291,7 +309,7 @@ function showCostAllocation() {
     btn.addEventListener('click', () => undoATransaction(idx));
   });
 
-  if (itemNameList.length > 4) {
+  if (itemNameList.length > 10) {
     showHideBtn.classList.remove('hidden');
   } else {
     showHideBtn.innerHTML = 'Show less'; 
