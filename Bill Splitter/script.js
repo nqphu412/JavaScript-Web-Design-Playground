@@ -27,63 +27,37 @@ const popUpColumn = document.querySelector('.pop-upColumn');
 
 const resultTable = document.querySelector('.division-result')
 
-// SECTION 0: Quick navigation when typing
-itemCost.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    backBtnPC.focus();
-    backBtnPhone.focus();
-  }
-  if (e.key === 'ArrowLeft') {
-    e.preventDefault();
-    itemName.focus();
-  }
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    divideBtn.focus();
-  }
-})
 
-itemName.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    backBtnPC.focus();
-    backBtnPhone.focus();
-  } 
-  if (e.key === 'ArrowRight') {
-    e.preventDefault();
-    itemCost.focus();
-  }
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    divideBtn.focus();
-  }
-})
+// Navigation using keyboard (arrow up and down)
+let elementIdx = 0;
+let focusables = [];
 
-divideBtn.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') { itemName.focus();}
-})
+function updateFocusables() {
+  focusables = Array.from(
+    document.querySelectorAll(`
+      input:not([disabled]),
+      button:not([disabled]):not(.undo-btn):not(.add-btn):not(.remove-btn)`
+    )
+  ).filter(element => element.offsetParent !== null);
+}
 
-backBtnPC.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowDown') { itemName.focus(); }
-});
-backBtnPhone.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowDown') { itemName.focus(); }
+document.addEventListener('keydown', (e) => {
+  const navigatingKeys = ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"];
+  if (!navigatingKeys.includes(e.key)) return;
+  if (focusables.length === 0) return;
+
+  e.preventDefault();
+
+  const direction = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+  elementIdx = (elementIdx + direction + focusables.length) % focusables.length;    
+  focusables[elementIdx].focus();
 });
 
-// SECTION 1: Add everyone' name
+// Add everyone's name
 nameInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {addName();}
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    nextBtn.focus();
-  }
 });
 addButton.addEventListener('click', addName);
-
-nextBtn.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') { nameInput.focus(); }
-})
 
 function addName() {
   if (nameInput.value === '') {
@@ -93,9 +67,10 @@ function addName() {
   nameInput.value = ``;
   showName();
   resetPage();
+  updateFocusables();
 }
 
-
+// Show all names that already added
 function showName() {
   showNameArea.innerHTML = ''; // Reset display
 
@@ -127,14 +102,16 @@ function showName() {
   showNextBtn();
 }
 
+// In case when we include a wrong person
+// (Or just want to change name)
 function removeAName(idx) {
   nameList.splice(idx, 1);
   showName();
-  resetPage();
   showNextBtn();
+  resetPage();
 }
 
-// SECTION 2: NEXT, RESET buttons appear
+// NEXT, BACK buttons appear
 function showNextBtn() {
   backBtnPC.classList.remove('reset-shown');
   backBtnPhone.classList.remove('reset-shown');
@@ -148,6 +125,8 @@ function showNextBtn() {
 };
 
 nextBtn.addEventListener('click', () => {
+  elementIdx = 0; // Reset the idx for navigation
+
   showSplittingSection();
   nextBtn.classList.remove('next-shown');
   page1Layout.classList.add('hidden');
@@ -156,34 +135,41 @@ nextBtn.addEventListener('click', () => {
   backBtnPhone.classList.add('reset-shown');
   document.querySelector('.current-total-title').classList.remove('hidden');
   page2Layout.classList.remove('hidden');
+
+  updateFocusables();
 });
 
 backBtnPC.addEventListener('click', () => {
+  elementIdx = 0; // Reset the idx for navigation
+
   page1Layout.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.add('hidden');
   page2Layout.classList.add('hidden');
   backBtnPC.classList.remove('reset-shown');
+  backBtnPhone.classList.remove('reset-shown');
   
-  // Reset display
   showName();
-  resetPage();
+  updateFocusables();
 });
+
 backBtnPhone.addEventListener('click', () => {
+  elementIdx = 0; // Reset the idx for navigation
+
   page1Layout.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.add('hidden');
   page2Layout.classList.add('hidden');
+  backBtnPC.classList.remove('reset-shown');
   backBtnPhone.classList.remove('reset-shown');
 
-  // Reset display
   showName();
-  resetPage();
+  updateFocusables();
 });
 
+// Reset page only activated when new name added or old name deleted
 function resetPage() {
   peopleColumn.innerHTML = '';
   moneyColumn.innerHTML = '';
   popUpColumn.innerHTML = '';
-
   itemNameList = [];
   itemCostList = [];
   itemPeopleList = [];
@@ -193,16 +179,16 @@ function resetPage() {
   createTable = true;
 }
 
-// SECTION 3: Add cost and item name and Choose people who used that item
+// Create an area to insert item name and item cost
+// And choose the corresponding people to add to their total
 function showSplittingSection() {
   splittingSection.classList.add('remainder-shown');
 
   // Update current total
   updateTotal();
 
-  if (createTable === false) {
-    return;
-  }
+  // Early return when the table/dividing section is already created
+  if (createTable === false) {return;}
 
   nameList.forEach((namePerson) => {
     // Name side
@@ -232,32 +218,35 @@ function showSplittingSection() {
   createTable = false;
 }
 
+// Indicate the total of all transaction so far
+// This would help users to track if the total is matched with what they have in real life
 function updateTotal() {
   const currentTotal = itemCostList.reduce((total, num) => total + Number(num), 0);
   totalShow.innerHTML = `Current Total: ${Number(currentTotal).toFixed(2)}`;
 };
 
+// This allow users to allocate cost to the people buying the item.
+// Only work when item name and cost is inserted and people are selected
 divideBtn.addEventListener('click', () => {performDivision();})
 
 function performDivision() { 
   const allPeopleUsingItem = document.querySelectorAll('.peopleClick');
-  
   if (itemCost.value <= 0 || 
     itemName.value === '' ||
-    allPeopleUsingItem.length === 0) {
-    return; 
-  } // Wrong format
+    allPeopleUsingItem.length === 0) 
+    {return;} // Wrong format
 
-  itemNameList.splice(0,0,itemName.value);
-  itemCostList.splice(0,0,itemCost.value);
+  itemNameList.splice(0, 0, itemName.value);
+  itemCostList.splice(0, 0, itemCost.value);
   updateTotal();
-  
+
+  // EXtract name of people involved in each transaction
   let allPeopleName = [];
   allPeopleUsingItem.forEach(personName => {
-    allPeopleName.splice(0,0,personName.innerHTML);
+    allPeopleName.splice(0, 0, personName.innerHTML);
     personName.classList.remove('peopleClick');
   } );
-  itemPeopleList.splice(0,0,allPeopleName);
+  itemPeopleList.splice(0, 0, allPeopleName);
 
   const matchingIdx = allPeopleName.map(name => nameList.indexOf(name));
   const afterDivisionCost = itemCost.value / allPeopleUsingItem.length;
@@ -271,6 +260,7 @@ function performDivision() {
     }
   });
 
+  // Pop up the corresponding additional amount
   const allPopUpButton = document.querySelectorAll('.popup-btn');
   allPopUpButton.forEach((eachPupUpBtn, idx) => {
     eachPupUpBtn.classList.remove('hidden');
@@ -280,19 +270,24 @@ function performDivision() {
       eachPupUpBtn.innerHTML = ` `;
     }
 
+    // Only let it show for 1 second, then hide it after that
     setTimeout(() => {
       eachPupUpBtn.classList.add('hidden');
       eachPupUpBtn.innerHTML = ``;
     }, 1000)
   });
 
-  showCostAllocation();
-  showSplittingSection();
+  showCostAllocation(); // Update the history table
 
+  // Reset the input space
   itemCost.value = '';
   itemName.value = '';
+
+  // After dividing, reset to get to the input element fast
+  elementIdx = 0;
 };
 
+// Show all division history with corresponding undo button
 function showCostAllocation() {
   resultTable.innerHTML = '';
   itemCostList.forEach((cost, idx) => {
@@ -309,6 +304,7 @@ function showCostAllocation() {
     btn.addEventListener('click', () => undoATransaction(idx));
   });
 
+  // Allow scrolling bar when there is more than 10 division activities
   if (itemNameList.length > 10) {
     showHideBtn.classList.remove('hidden');
   } else {
@@ -317,6 +313,8 @@ function showCostAllocation() {
   }
 }
 
+// When a division is wrong for any reason
+// Users can undo it, corresponding amount will be deducted for those individuals
 function undoATransaction(idx) {
   const targetPeople = itemPeopleList[idx]
   const matchingIdx = targetPeople.map(name => nameList.indexOf(name));
@@ -337,6 +335,7 @@ function undoATransaction(idx) {
   showCostAllocation();
 };
 
+// Allow users to show all the division history or show less
 showHideBtn.addEventListener('click', () => {
   if (showHideBtn.innerHTML === 'Show less') {
     showHideBtn.innerHTML = 'Full';
