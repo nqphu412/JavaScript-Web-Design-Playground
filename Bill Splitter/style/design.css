@@ -186,9 +186,6 @@ input:focus {
   height: 50px;
 }
 
-
-
-
 .current-total-title {
   color: #c66f80;
   justify-content: center;
@@ -257,6 +254,10 @@ input:focus {
   color: #c66f80;
   margin-left: 40px;
   align-self: stretch;
+  transition: all 0.1s ease;
+}
+.undo-btn:hover {
+  background-color: #f4c7d0;
 }
 
 .splitting-zone {
@@ -397,3 +398,4 @@ input:focus {
     display: none;
   }
 }
+
