@@ -125,8 +125,9 @@ input:focus {
 }
 
 .personName {
-  color: #9faa74;
+  color: #4a6644;
   margin-left: 15px;
+  margin-bottom: 0px;
   font-size: 15px;
   width: 150px;
   white-space: nowrap;
@@ -165,7 +166,7 @@ input:focus {
 }
 .next-btn:focus, .back-btn:focus, .back-btn-phone:focus,
 .divide-btn:focus {
-  border: 1px solid #4a6644;
+  border: 3px solid #4a6644;
   outline: none;
 }
 
@@ -215,7 +216,7 @@ input:focus {
 .history-title, .splitting-instruction {
   color: #f4c7d0;
   font-family: "Lexend Peta", sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   margin-bottom: 20px;
 }
 
@@ -396,5 +397,3 @@ input:focus {
     display: none;
   }
 }
-
-
