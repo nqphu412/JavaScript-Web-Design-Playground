@@ -1,12 +1,17 @@
+/*GENERAL DESIGN*/
+* {
+  font-family: "Lexend Peta", sans-serif;
+  color: #4A6644;
+  font-size: 16px;
+}
+
 body {
-  width: clamp(700px, 80vw, 1200px);
+  width: clamp(700px, 80vw, 1500px);
   margin: 0 auto;
   padding-bottom: 50px;
 }
 
 h1, h2 {
-  font-family: "Lexend Peta", sans-serif;
-  color: #4A6644;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,27 +20,16 @@ h1, h2 {
   margin-bottom: 10px;
 }
 
-.intro-line {
-  color: #c66f80;
-}
-
 p {
-  font-family: "Lexend Peta", sans-serif;
-  font-size: 24px;
   margin-top: 0px;
 }
 
 button {
-  font-size: 16px;
-  font-family: "Lexend Peta", sans-serif;
   cursor: pointer;
   border-radius: 10px;
 }
 
 input {
-  color: #4a6644;
-  font-size: 16px;
-  font-family: "Lexend Peta", sans-serif;
   padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid #d7dab3;
@@ -44,74 +38,51 @@ input::placeholder {
   color: #9faa74;
 }
 input:focus {
-  border: 1px solid #4a6644;
+  border: 3px solid #4a6644;
   outline: none;
 }
 
 /*PAGE 1 SECTION: Inserting name*/
+.intro-line {
+  color: #c66f80;
+}
 .add-name-line {
   display: flex;
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
 .name-input {
   width: 150px;
 }
 
-.add-btn {
+.add-btn, .remove-btn {
   color: #9faa74;
-  font-weight: 400;
-  font-size: 24px;
   background-color: transparent;
   width: 50px;
   height: 50px;
-  margin-left: 10px;
-  border-radius: 10px;
-  border: 1px solid #d7dab3;
-  transition: all 0.2s ease;
   padding-bottom: 7px;
+  transition: all 0.2s ease;
 }
-.add-btn:hover {
+
+.add-btn {
+  font-weight: 400;
+  font-size: 24px;
+  margin-left: 10px;
+  border: 1px solid #d7dab3;
+}
+
+.remove-btn {
+  font-size: 30px;
+  border: none;
+}
+
+.add-btn:hover, .remove-btn:hover {
   background-color: #d7dab3;
 }
-.add-btn:active {
+.add-btn:active, .remove-btn:active {
   color: #4a6644;
   background-color: #9faa74;
   border: 1px solid #9faa74;
-}
-
-
-.remove-btn {
-  padding-bottom: 8px;
-  font-size: 30px;
-  color: #9faa74;
-  width: 50px;
-  height: 50px;
-  border: none;
-  background-color: transparent;
-  transition: all 0.2s ease;
-}
-.remove-btn:hover {
-  background-color: #d7dab3;
-}
-
-.add-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.remove-img {
-  max-width: 20px;
-  height: auto;
-}
-
-.name-shown-js {
-  display: none;
-}
-
-.name-shown {
-  display: block;
 }
 
 .eachName {
@@ -119,16 +90,12 @@ input:focus {
   width: 251px;
   grid-template-columns:1fr 50px;
   align-items: center;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  border-bottom: 0.5px solid #4a6644;
+  border-bottom: 1px solid #4a66445c;
 }
 
 .personName {
-  color: #4a6644;
   margin-left: 15px;
   margin-bottom: 0px;
-  font-size: 15px;
   width: 150px;
   white-space: nowrap;
   overflow: hidden;
@@ -136,60 +103,59 @@ input:focus {
 }
 
 
-/*NEXT BUTTON*/
-.next-btn, .back-btn, .back-btn-phone, .divide-btn{
-  display: none;
-  color: #4a6644;
+/*MAIN BUTTON DESIGN*/
+.next-btn, .back-btn, .back-btn-phone, .divide-btn {
+  display: block;
   background-color: transparent;
   border: 1px solid #9faa74;
-  border-radius: 10px;
   box-shadow: 0px 5px #9faa74;
   margin-top: 20px;
   margin-bottom: 40px;
   padding: 10px 20px;
   transition: all 0.2s ease;
 }
-.next-btn:hover, .back-btn:hover, .back-btn-phone:hover,
-.divide-btn:hover {
+.next-btn:hover, .back-btn:hover, .back-btn-phone:hover, .divide-btn:hover {
   transform: translateY(-3px);
   color: #c66f80;
   border: 1px solid #c66f80;
   box-shadow: 0px 8px #c66f80;
 }
-.next-btn:active, .back-btn:active, .back-btn-phone:active,
-.divide-btn:active {
+.next-btn:active, .back-btn:active, .back-btn-phone:active, .divide-btn:active {
   background-color: #4A6644;
   color: white;
   border-color: white;
   transform: translateY(3px);
   box-shadow: 0px 0px #4A6644;
 }
-.next-btn:focus, .back-btn:focus, .back-btn-phone:focus,
-.divide-btn:focus {
+.next-btn:focus, .back-btn:focus, .back-btn-phone:focus, .divide-btn:focus {
   border: 3px solid #4a6644;
   outline: none;
 }
 
-.back-btn, .back-btn-phone {
+.back-btn, .back-btn-phone { /*BACK BUTTON DESIGN*/
   position: absolute;
   margin-top: 11px;
 }
 
-.next-shown, .reset-shown {
-  display: block;
-}
-
 .divide-btn {
-  display: block;
   width: 70%;
   padding: 10px;
   height: 50px;
 }
 
+
+
+/*PAGE 2 SECTION: CALCULATING AND DIVIDING HISTORY*/
 .current-total-title {
   color: #c66f80;
   justify-content: center;
   font-size: 30px;
+}
+
+.history-title, .splitting-instruction {
+  color: #f4c7d0;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .splittingPage {
@@ -210,40 +176,24 @@ input:focus {
   flex-direction: column;
 }
 
-.history-title, .splitting-instruction {
-  color: #f4c7d0;
-  font-family: "Lexend Peta", sans-serif;
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.division-result {
-  margin-left: 10px;
-}
-
-.scroll-activate {
+.scroll-activate { /*FOR <div class="division-result>*/
   max-height: 400px;
   overflow-y: auto;
 }
 
-.hidden {
-  display: none;
-}
-
 .splitting-row {
-  color: #4A6644;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  padding-bottom: 6px;
+  padding-bottom: 12px;
   padding-left: 5px;
   border-bottom: 0.5px solid #9faa744e;
 }
-.detail-devision {
+
+.detail-division {
   display: inline;
-  font-size: 16px;
   margin-bottom: 0px;
 }
 
@@ -260,24 +210,17 @@ input:focus {
   background-color: #f4c7d0;
 }
 
-.splitting-zone {
-  display: none;
-}
-
-.remainder-shown {
-  display: block;
-}
-
 .eachCost, .itemName {
   box-sizing: border-box;
   width: 30%;
   padding: 10px;
+  margin-bottom: 16px;
 }
 .itemName {
-  margin-right: 40px;
+  margin-right: 34px;
 }
 
-.allocation-section {
+.performing-section {
   display: flex;
   column-gap: 40px;
 }
@@ -294,22 +237,17 @@ input:focus {
   width: 30%;
 }
 
-.division-section-btn {
-  padding: 10px;
-  margin-bottom: 4px;
-}
-
 .people-button, .money-btn, .popup-btn {
   white-space: nowrap;
   height: 50px;
   border: none;
+  padding: 10px;
+  margin-bottom: 4px;
 }
-
 .people-button, .money-btn {
   box-shadow: 0px 5px #4a6644;
   transform: translateY(-5px);
 }
-
 .people-button {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -317,7 +255,18 @@ input:focus {
   color: white;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-
+.money-btn {
+  background-color: transparent;
+  border: 1px solid #4a6644;
+  pointer-events: none;
+}
+.popup-btn {
+  pointer-events: none;
+  max-height: auto;
+  background-color: transparent;
+  transform: translateY(-5px) translateX(-40px);
+  color: #c66f80;
+}
 .people-button:hover {
   background-color: transparent;
   color: #4a6644;
@@ -325,7 +274,6 @@ input:focus {
   transform: translateY(-8px);
   box-shadow: 0px 8px #4a6644;
 }
-
 .people-button:active, .peopleClick {
   color: #c66f80;
   background-color: #f4c7d0;
@@ -333,7 +281,6 @@ input:focus {
   transform: translateY(0px);
   box-shadow: 0px 0px;
 }
-
 .peopleClick:hover {
   background-color: transparent;
   color: #c66f80;
@@ -341,28 +288,12 @@ input:focus {
   transform: translateY(-8px);
   box-shadow: 0px 8px #f4c7d0;
 }
-
 .peopleClick:active {
   background-color: transparent;
   color: #c66f80;
   border: 1px solid #c66f80;
   transform: translateY(0px);
   box-shadow: 0px 0px;
-}
-
-.money-btn {
-  background-color: transparent;
-  color: #4a6644;
-  border: 1px solid #4a6644;
-  pointer-events: none;
-}
-
-.popup-btn {
-  pointer-events: none;
-  max-height: auto;
-  background-color: transparent;
-  transform: translateY(-5px) translateX(-40px);
-  color: #c66f80;
 }
 
 .peopleClick {
@@ -373,7 +304,6 @@ input:focus {
 }
 
 .show-hide-btn {
-  color: #4A6644;
   border: 1px solid #4A6644;
   background-color: #d7dab3;
   margin: 0 auto;
@@ -382,10 +312,13 @@ input:focus {
   margin-top: 20px;
   transition: all 0.2s ease;
 }
-
 .show-hide-btn:hover {
   color: white;
   background-color: #4A6644;
+}
+
+.hidden {
+  display: none;
 }
 
 @media (max-width: 1000px) {
@@ -398,4 +331,3 @@ input:focus {
     display: none;
   }
 }
-
