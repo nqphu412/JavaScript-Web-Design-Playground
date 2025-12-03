@@ -75,12 +75,12 @@ function showName() {
   showNameArea.innerHTML = ''; // Reset display
 
   if (nameList.length === 0) {
-    showNameArea.classList.remove('name-shown');
-    nextBtn.classList.remove('next-shown');
+    showNameArea.classList.add('hidden');
+    nextBtn.classList.add('hidden');
     return;
   }; // Early return when no name add
 
-  showNameArea.classList.add('name-shown');
+  showNameArea.classList.remove('hidden');
 
   nameList.forEach(name => {
     const onePerson = document.createElement('div');
@@ -113,26 +113,26 @@ function removeAName(idx) {
 
 // NEXT, BACK buttons appear
 function showNextBtn() {
-  backBtnPC.classList.remove('reset-shown');
-  backBtnPhone.classList.remove('reset-shown');
+  backBtnPC.classList.add('hidden');
+  backBtnPhone.classList.add('hidden');
 
   if (nameList.length < 2) {
-    nextBtn.classList.remove('next-shown');
+    nextBtn.classList.add('hidden');
     return;
   };
 
-  nextBtn.classList.add('next-shown');
+  nextBtn.classList.remove('hidden');
 };
 
 nextBtn.addEventListener('click', () => {
   elementIdx = 0; // Reset the idx for navigation
 
   showSplittingSection();
-  nextBtn.classList.remove('next-shown');
+  nextBtn.classList.add('hidden');
   page1Layout.classList.add('hidden');
 
-  backBtnPC.classList.add('reset-shown');
-  backBtnPhone.classList.add('reset-shown');
+  backBtnPC.classList.remove('hidden');
+  backBtnPhone.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.remove('hidden');
   page2Layout.classList.remove('hidden');
 
@@ -145,8 +145,8 @@ backBtnPC.addEventListener('click', () => {
   page1Layout.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.add('hidden');
   page2Layout.classList.add('hidden');
-  backBtnPC.classList.remove('reset-shown');
-  backBtnPhone.classList.remove('reset-shown');
+  backBtnPC.classList.add('hidden');
+  backBtnPhone.classList.add('hidden');
   
   showName();
   updateFocusables();
@@ -158,8 +158,8 @@ backBtnPhone.addEventListener('click', () => {
   page1Layout.classList.remove('hidden');
   document.querySelector('.current-total-title').classList.add('hidden');
   page2Layout.classList.add('hidden');
-  backBtnPC.classList.remove('reset-shown');
-  backBtnPhone.classList.remove('reset-shown');
+  backBtnPC.classList.add('hidden');
+  backBtnPhone.classList.add('hidden');
 
   showName();
   updateFocusables();
@@ -173,7 +173,7 @@ function resetPage() {
   itemNameList = [];
   itemCostList = [];
   itemPeopleList = [];
-  resultTable.innerHTML = '';
+  resultTable.innerHTML = 'None at the moment';
 
   // Mark it needs to create table again
   createTable = true;
@@ -182,7 +182,7 @@ function resetPage() {
 // Create an area to insert item name and item cost
 // And choose the corresponding people to add to their total
 function showSplittingSection() {
-  splittingSection.classList.add('remainder-shown');
+  splittingSection.classList.remove('hidden');
 
   // Update current total
   updateTotal();
@@ -193,7 +193,7 @@ function showSplittingSection() {
   nameList.forEach((namePerson) => {
     // Name side
     const btn = document.createElement('button');
-    btn.classList.add('division-section-btn', 'people-button');
+    btn.classList.add('people-button');
     btn.innerHTML = namePerson;
     btn.addEventListener('click', () => {
       btn.classList.toggle('peopleClick')
@@ -202,20 +202,21 @@ function showSplittingSection() {
 
     // Money side
     const moneyBtn = document.createElement('button');
-    moneyBtn.classList.add('division-section-btn', 'money-btn');
+    moneyBtn.classList.add('money-btn');
     moneyBtn.innerHTML = '0.00';
     moneyBtn.disabled = true;
     moneyColumn.appendChild(moneyBtn);
 
     // Pop-up side
     const popUpBtn = document.createElement('button');
-    popUpBtn.classList.add('division-section-btn', 'popup-btn', 'hidden');
+    popUpBtn.classList.add('popup-btn', 'hidden');
     popUpBtn.disabled = true;
     popUpColumn.appendChild(popUpBtn);
   })
 
   // Mark the table is already created.
   createTable = false;
+  resultTable.innerHTML = 'None at the moment';
 }
 
 // Indicate the total of all transaction so far
@@ -294,7 +295,7 @@ function showCostAllocation() {
     let currentState = document.createElement('div');
     currentState.classList.add('splitting-row');
     currentState.innerHTML = `
-    <p class='detail-devision'>${cost} of ${itemNameList[idx]} spent by ${itemPeopleList[idx].join(', ')}</p>
+    <p class='detail-division'>${cost} of ${itemNameList[idx]} spent by ${itemPeopleList[idx].join(', ')}</p>
     <button class='undo-btn'>Undo</button>`;
     resultTable.appendChild(currentState);
   });
@@ -333,6 +334,8 @@ function undoATransaction(idx) {
   itemPeopleList.splice(idx, 1);
   updateTotal();
   showCostAllocation();
+
+  if (itemNameList.length === 0) { resultTable.innerHTML = 'None at the moment'; };
 };
 
 // Allow users to show all the division history or show less
@@ -344,4 +347,4 @@ showHideBtn.addEventListener('click', () => {
     showHideBtn.innerHTML = 'Show less'; 
     resultTable.classList.remove('scroll-activate');
   }
-})
+});
