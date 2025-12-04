@@ -5,17 +5,6 @@ This repository is where I explore and practice **JavaScript-based web design**.
 ---
 
 ## Current Projects
-### Rock-Paper-Scissors Game
-A browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaScript. Play against the computer with instant results, live score updates, and a clean responsive interface.
-- Click-based gameplay with responsive buttons  
-- Computer-generated opponent moves  
-- Real-time score tracking  
-- Instant result display (Win / Lose / Draw)  
-- Responsive layout for both desktop and mobile  
-- Simple and clean UI for easy play
-
-🔗 **Live Demo**: [Play the game here](https://nqphu412.github.io/JavaScript-Web-Design-Playground/rock-paper-scissor/rock-paper-scissor.html)
-
 ### Bill Splitter
 A lightweight and user-friendly web app to fairly split expenses among friends and family. Designed especially for situations where **one person pays for everything** — such as trips, grocery shopping, or group outings — and needs a quick way to calculate who owes what.
 - **Ideal for group payments**: Perfect when one person covers all costs and needs to calculate each person’s share easily.
@@ -27,6 +16,17 @@ A lightweight and user-friendly web app to fairly split expenses among friends a
 - **No login, no setup**: Runs directly in the browser with zero configuration required.
 
 🔗 **Live Demo**: [Start splitting bills](https://nqphu412.github.io/JavaScript-Web-Design-Playground/Bill%20Splitter/index.html)
+
+### Rock-Paper-Scissors Game
+A browser-based Rock-Paper-Scissors game built with HTML, CSS, and JavaScript. Play against the computer with instant results, live score updates, and a clean responsive interface.
+- Click-based gameplay with responsive buttons  
+- Computer-generated opponent moves  
+- Real-time score tracking  
+- Instant result display (Win / Lose / Draw)  
+- Responsive layout for both desktop and mobile  
+- Simple and clean UI for easy play
+
+🔗 **Live Demo**: [Play the game here](https://nqphu412.github.io/JavaScript-Web-Design-Playground/rock-paper-scissor/rock-paper-scissor.html)
 
 ---
 
